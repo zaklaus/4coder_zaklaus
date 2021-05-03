@@ -451,6 +451,11 @@ typedef int socklen_t;
 #include "4coder_fleury_command_server.cpp"
 #endif
 #include "4coder_fleury_casey.cpp"
+
+
+//~ NOTE(zak): whitebox support
+#include "whitebox_4coder.cpp"
+
 #include "4coder_fleury_hooks.cpp"
 
 //~ NOTE(rjf): Plots Demo File
@@ -711,7 +716,7 @@ CUSTOM_DOC("Fleury startup event")
             
             Face_Description desc = {0};
             {
-                desc.font.file_name =  push_u8_stringf(scratch, "%.*sfonts/Inconsolata-Regular.ttf", string_expand(bin_path));
+                desc.font.file_name =  push_u8_stringf(scratch, "%.*sfonts/CascadiaMono.ttf", string_expand(bin_path));
                 desc.parameters.pt_size = normal_code_desc.parameters.pt_size - 1;
                 desc.parameters.bold = 1;
                 desc.parameters.italic = 1;

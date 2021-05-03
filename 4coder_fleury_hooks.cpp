@@ -844,9 +844,12 @@ F4_Tick(Application_Links *app, Frame_Info frame_info)
     F4_CLC_Tick(frame_info);
     F4_PowerMode_Tick(app, frame_info);
     F4_UpdateFlashes(app, frame_info);
-    
+
     // NOTE(rjf): Default tick stuff from the 4th dimension:
     default_tick(app, frame_info);
+
+    View_ID view = get_active_view(app, Access_ReadVisible);
+    wb_4c_tick(app, view);
 }
 
 //~ NOTE(rjf): Whole Screen Render Hook
