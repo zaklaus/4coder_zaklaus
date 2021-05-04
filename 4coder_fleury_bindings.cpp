@@ -149,7 +149,7 @@ F4_SetDefaultBindings(Mapping *mapping)
     Bind(close_build_panel,             KeyCode_Comma, KeyCode_Alt);
     Bind(goto_next_jump,                KeyCode_N, KeyCode_Alt);
     Bind(goto_prev_jump,                KeyCode_N, KeyCode_Alt, KeyCode_Shift);
-    Bind(build_in_build_panel,          KeyCode_M, KeyCode_Alt);
+    Bind(zpl_build_in_build_panel,          KeyCode_M, KeyCode_Alt);
     Bind(goto_first_jump,               KeyCode_M, KeyCode_Alt, KeyCode_Shift);
     Bind(toggle_filebar,                KeyCode_B, KeyCode_Alt);
     Bind(execute_any_cli,               KeyCode_Z, KeyCode_Alt);
