@@ -982,3 +982,18 @@ function BUFFER_EDIT_RANGE_SIG(F4_BufferEditRange)
     // no meaning for return
     return(0);
 }
+
+
+BUFFER_HOOK_SIG(zaklaus_new_file) {
+    Scratch_Block scratch(app);
+    String_Const_u8 file_name = push_buffer_base_name(app, scratch, buffer_id);
+    if (!string_match(string_postfix(file_name, 2), string_u8_litexpr(".h"))) {
+        return(0);
+    }
+
+    Buffer_Insertion insert = begin_buffer_insertion_at_buffered(app, buffer_id, 0, scratch, KB(16));
+    insertf(&insert, "#pragma once\n");
+    end_buffer_insertion(&insert);
+    
+    return(0);
+}
