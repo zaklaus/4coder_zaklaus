@@ -442,6 +442,7 @@ typedef int socklen_t;
 #include "4coder_fleury_plot.cpp"
 #include "4coder_fleury_calc.cpp"
 #include "4coder_fleury_lego.cpp"
+#include "4coder_zaklaus_git.cpp"
 #include "4coder_fleury_pos_context_tooltips.cpp"
 #include "4coder_fleury_code_peek.cpp"
 #include "4coder_fleury_recent_files.cpp"
@@ -580,6 +581,15 @@ CUSTOM_DOC("Fleury startup event")
                                              BufferCreate_NeverAttachToFile |
                                              BufferCreate_AlwaysNew);
             buffer_set_setting(app, buffer, BufferSetting_Unimportant, true);
+        }
+        
+        // NOTE(rjf): Open git buffer.
+        {
+            Buffer_ID buffer = create_buffer(app, string_u8_litexpr("*git*"),
+                                             BufferCreate_NeverAttachToFile |
+                                             BufferCreate_AlwaysNew);
+            buffer_set_setting(app, buffer, BufferSetting_Unimportant, true);
+            buffer_set_setting(app, buffer, BufferSetting_ReadOnly, true);
         }
         
         // NOTE(rjf): Open LOC buffer.

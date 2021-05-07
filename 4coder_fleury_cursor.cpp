@@ -1,3 +1,71 @@
+//~ NOTE(zaklaus): particles !!!
+
+struct Particle_N {
+    Vec2_f32 pos;
+    Vec2_f32 vel;
+    Vec4_f32 colour;
+    f32 damper;
+};
+
+#define MAX_PARTICLES 256
+global Particle_N particles[MAX_PARTICLES] = {};
+
+static float
+random_f32(float min, float max) {
+    return ((max - min) * ((float)rand() / RAND_MAX)) + min;
+}
+
+internal bool
+is_in_rect(Vec2_f32 pos, Rect_f32 rect){
+    return pos.x <= (rect.x1) && pos.x >= rect.x0 &&
+        pos.y <= (rect.y1) && pos.y >= rect.y0;
+}
+
+static Vec2_f32
+random_point_in_rect(Rect_f32 rect){
+    Vec2_f32 point = {};
+    point.x = random_f32(rect.x0, rect.x1);
+    point.y = random_f32(rect.y0, rect.y1);
+    return point;
+}
+
+static void
+emit_particles_from_cursor(Application_Links* app, Rect_f32 cursor_rect, f32 scale, ARGB_Color colour){
+    animate_in_n_milliseconds(app, 0);
+    
+    for(int i = 0; i < MAX_PARTICLES; i++){
+        auto particle = &particles[i];
+        
+        if(particle->vel.x == 0 && particle->vel.y == 0){
+            particle->pos = random_point_in_rect(cursor_rect);
+            particle->vel.x = random_f32(-.005f, .005f);
+            particle->vel.y = random_f32(-.005f, .005f);
+            particle->damper = random_f32(0.95f, 1.0f);
+            particle->colour = unpack_color(colour);
+        }else {
+            particle->pos.x += particle->vel.x;
+            particle->pos.y += particle->vel.y;
+            particle->vel.x *= particle->damper;
+            particle->vel.y *= particle->damper;
+            particle->colour.a *= clamp(0.98f, particle->damper, 1.0f);
+            
+            if(particle->vel.x < 0.001f && particle->vel.x > -0.001f){
+                particle->vel.x = 0;
+            }
+            if(particle->vel.y < 0.001f && particle->vel.y > -0.001f){
+                particle->vel.y = 0;
+            }
+        }
+        
+        Rect_f32 particle_rect = {};
+        particle_rect.p0 = particle->pos;
+        particle_rect.x1 = particle->pos.x + scale;
+        particle_rect.y1 = particle->pos.y + scale;
+        draw_rectangle(app, particle_rect, 1.0f, pack_color(particle->colour)); 
+    }
+} 
+
+
 //~ NOTE(rjf): Cursor rendering
 
 global int global_cursor_count = 1;
@@ -81,6 +149,16 @@ C4_RenderCursorSymbolThingy(Application_Links *app, Rect_f32 rect,
         
 		draw_rectangle(app, side, roundness, color);
 	}
+
+	Rect_f32 part;
+	float off = 32;
+	part.x0 = rect.x0+off;
+	part.x1 = rect.x0 + 2+off;
+	part.y0 = rect.y0+off;
+	part.y1 = rect.y1 + 2+off;
+
+	ARGB_Color part_cursor_color = F4_ARGBFromID(active_color_table, fleury_color_cursor_inactive, 0);
+	//emit_particles_from_cursor(app, part, 5.0f, part_cursor_color);
 }
 
 function void
