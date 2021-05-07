@@ -153,7 +153,7 @@ F4_SetDefaultBindings(Mapping *mapping)
     Bind(goto_first_jump,               KeyCode_M, KeyCode_Alt, KeyCode_Shift);
     Bind(toggle_filebar,                KeyCode_B, KeyCode_Alt);
     Bind(zaklaus_execute_any_cli,               KeyCode_Z, KeyCode_Alt);
-    Bind(execute_previous_cli,          KeyCode_Z, KeyCode_Alt, KeyCode_Shift);
+    Bind(zaklaus_execute_previous_cli,          KeyCode_Z, KeyCode_Alt, KeyCode_Shift);
     Bind(command_lister,                KeyCode_X, KeyCode_Alt);
     Bind(project_command_lister,        KeyCode_X, KeyCode_Alt, KeyCode_Shift);
     Bind(list_all_functions_current_buffer_lister, KeyCode_I, KeyCode_Control, KeyCode_Shift);

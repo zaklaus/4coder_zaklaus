@@ -9,9 +9,9 @@ keys_global =
     { "change_active_panel",                      "Comma",  "Control"                  },
     { "change_active_panel_backwards",            "Comma",  "Control", "Shift"         },
     { "project_go_to_root_directory",             "H",      "Control"                  },
-    { "f4_toggle_compilation_expand",         "Insert"                             },
+    { "f4_toggle_compilation_expand",         "Comma",  "Alt"                             },
     { "change_to_build_panel",                    "Period", "Alt"                      },
-    { "close_build_panel",                        "Comma",  "Alt"                      },
+    { "close_build_panel",                        "Period",  "Alt", "Shift"                      },
     { "f4_switch_syntax_option",                  "Tick",   "Control"                  },
     
     // NOTE(rjf): Files
@@ -31,12 +31,12 @@ keys_global =
     { "goto_first_jump",                          "M",      "Alt",     "Shift"         },
     
     // NOTE(rjf): Commands
-    { "execute_any_cli",                          "Z",      "Alt"                      },
-    { "execute_previous_cli",                     "Z",      "Alt",     "Shift"         },
+    { "zaklaus_execute_any_cli",                          "Z",      "Alt"                      },
+    { "zaklaus_execute_previous_cli",                     "Z",      "Alt",     "Shift"         },
     { "command_lister",                           "X",      "Alt"                      },
     
     // NOTE(rjf): Project
-    { "build_in_build_panel",                     "M",      "Alt"                      },
+    { "zpl_build_in_build_panel",                     "M",      "Alt"                      },
     { "project_command_lister",                   "X",      "Alt",     "Shift"         },
     { "project_fkey_command",                     "F1", "Control"                      },
     { "project_fkey_command",                     "F2", "Control"                      },

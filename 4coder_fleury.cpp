@@ -549,6 +549,15 @@ CUSTOM_DOC("Fleury startup event")
     
     //~ NOTE(rjf): Open special buffers.
     {
+        // NOTE(zaklaus): Open console buffer
+        {
+            Buffer_ID buffer = create_buffer(app, string_u8_litexpr("*console*"),
+                                             BufferCreate_NeverAttachToFile |
+                                             BufferCreate_AlwaysNew);
+            buffer_set_setting(app, buffer, BufferSetting_Unimportant, true);
+            buffer_set_setting(app, buffer, BufferSetting_ReadOnly, true);
+        }
+        
         // NOTE(rjf): Open compilation buffer.
         {
             Buffer_ID buffer = create_buffer(app, string_u8_litexpr("*compilation*"),
@@ -583,7 +592,7 @@ CUSTOM_DOC("Fleury startup event")
             buffer_set_setting(app, buffer, BufferSetting_Unimportant, true);
         }
         
-        // NOTE(rjf): Open git buffer.
+        // NOTE(zaklaus): Open git buffer.
         {
             Buffer_ID buffer = create_buffer(app, string_u8_litexpr("*git*"),
                                              BufferCreate_NeverAttachToFile |
@@ -638,7 +647,7 @@ CUSTOM_DOC("Fleury startup event")
         view_set_buffer(app, right_view, right_id, 0);
         
         // NOTE(rjf): Restore Active to Left
-        view_set_active(app, view);
+        //view_set_active(app, view);
     }
     
     //~ NOTE(rjf): Auto-Load Project.
