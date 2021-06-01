@@ -66,6 +66,23 @@ CUSTOM_DOC("Add any file to commit")
         git_commit_line[bar_out.string.size] = 0;
         snprintf((char*)git_buffer, sizeof(git_buffer), "git add %s", git_commit_line);
         zaklaus_git_send_cmd(app, SCu8(git_buffer));
+        zaklaus_git_send_cmd(app, SCu8("git status"));
+    }
+}
+
+CUSTOM_COMMAND_SIG(zaklaus_git_diff)
+CUSTOM_DOC("Diff any file")
+{
+    Query_Bar_Group group(app);
+    Query_Bar bar_out = {};
+    bar_out.prompt = string_u8_litexpr("File Filter: ");
+    bar_out.string = SCu8(git_commit_line, (u64)0);
+    bar_out.string_capacity = sizeof(git_commit_line);
+    if (query_user_string(app, &bar_out)) {
+        bar_out.string.size = clamp_top(bar_out.string.size, sizeof(git_commit_line) - 1);
+        git_commit_line[bar_out.string.size] = 0;
+        snprintf((char*)git_buffer, sizeof(git_buffer), "git --no-pager diff %s", git_commit_line);
+        zaklaus_git_send_cmd(app, SCu8(git_buffer));
     }
 }
 
@@ -82,6 +99,7 @@ CUSTOM_DOC("Restores any changed files")
         git_commit_line[bar_out.string.size] = 0;
         snprintf((char*)git_buffer, sizeof(git_buffer), "git restore %s", git_commit_line);
         zaklaus_git_send_cmd(app, SCu8(git_buffer));
+        zaklaus_git_send_cmd(app, SCu8("git status"));
     }
 }
 
@@ -98,6 +116,7 @@ CUSTOM_DOC("Unstages any staged file changes")
         git_commit_line[bar_out.string.size] = 0;
         snprintf((char*)git_buffer, sizeof(git_buffer), "git restore --staged %s", git_commit_line);
         zaklaus_git_send_cmd(app, SCu8(git_buffer));
+        zaklaus_git_send_cmd(app, SCu8("git status"));
     }
 }
 
@@ -105,6 +124,7 @@ CUSTOM_COMMAND_SIG(zaklaus_git_add_all)
 CUSTOM_DOC("Adds all changed files to commit")
 {
     zaklaus_git_send_cmd(app, SCu8("git add ."));
+    zaklaus_git_send_cmd(app, SCu8("git status"));
 }
 
 CUSTOM_COMMAND_SIG(zaklaus_git_pull)
