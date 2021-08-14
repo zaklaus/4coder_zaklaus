@@ -157,7 +157,7 @@ C4_RenderCursorSymbolThingy(Application_Links *app, Rect_f32 rect,
 	part.y0 = rect.y0+off;
 	part.y1 = rect.y1 + 2+off;
 
-	ARGB_Color part_cursor_color = F4_ARGBFromID(active_color_table, fleury_color_cursor_inactive, 0);
+	//ARGB_Color part_cursor_color = F4_ARGBFromID(active_color_table, fleury_color_cursor_inactive, 0);
 	//emit_particles_from_cursor(app, part, 5.0f, part_cursor_color);
 }
 
